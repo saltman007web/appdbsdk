@@ -17,7 +17,7 @@ jobs:
       - name: Set up Swift
         uses: fwal/setup-swift@v1
         with:
-          swift-version: '5.8' # Replace with the required Swift version
+          swift-version: '5.10.0' # Replace with the required Swift version
 
       - name: Build Package
         run: swift build --configuration release
@@ -36,7 +36,7 @@ jobs:
       - name: Set up Swift
         uses: fwal/setup-swift@v1
         with:
-          swift-version: '5.8' # Replace with the required Swift version
+          swift-version: '5.10.0' # Replace with the required Swift version
 
       - name: Archive Package
         run: |
