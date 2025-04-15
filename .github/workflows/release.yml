@@ -17,36 +17,33 @@ jobs:
       - name: Setup Swift
         uses: swift-actions/setup-swift@v2.3.0
         with:
-          swift-tools-version: 5.10
-  
-  import: PackageDescription
-  let package:
-      - name: "AppdbFramework"
-        platforms: .iOS@v18.5 , .tvOS@v18.5) 
-        products: .library
-      - name: "AppdbFramework"
-        targets: "AppdbRemoteBinaryPackage"
-        
-      - targets: .binaryTarget
-        name: "AppdbRemoteBinaryPackage"
-        url: "https://dbservices.to/lib-dist/AppdbFramework-1.6.2.xcframework.zip",
-        checksum: "673fd13ee2a4b9f39328af175bd8b6b5322fee104c0dc823644c1891ff1b668d"
-        
-      - name: Run Tests
-        run: swift test
+          swift-version@v5.10
 
-  package:
+#swift-tools-v5.10
+       
+// import: "https://dbservices.to/lib-dist/AppdbFramework-1.6.2.xcframework.zip"
+    
+steps:
+      - name: "AppdbFramework",
+        use: "actions/download-artifact@v3"
+        with:
+          "673fd13ee2a4b9f39328af175bd8b6b5322fee104c0dc823644c1891ff1b668d"
+         
+ package:
     needs: build
     runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
+      - name: Run Tests
+        run: swift test
 
       - name: Set up Swift
         uses: fwal/setup-swift@v2.3.0
         with:
-          swift-version: '5.10.0' # Replace with the required Swift version
+          swift-version: '5.10' # Replace with the required Swift version
    
       - name: Archive Package
         run: |
@@ -61,7 +58,7 @@ jobs:
 
   release:
     needs: package
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-22.04n
 
     steps:
       - name: Download Package
