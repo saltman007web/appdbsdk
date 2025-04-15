@@ -3,8 +3,8 @@ import PackageDescription
 let package = Package(
     name: "AppdbFramework",
     platforms: [
-        .iOS(.v15),
-        .tvOS(.v15)
+        .iOS(.v18.5),
+        .tvOS(.v18.5)
     ],
     products: [
         .library(
